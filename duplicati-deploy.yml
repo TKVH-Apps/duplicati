@@ -50,6 +50,16 @@ spec:
             memory: 256Mi
           requests:
             memory: 128Mi
+        readinessProbe:
+          tcpSocket:
+            port: duplicati
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          tcpSocket:
+            port: duplicati
+          initialDelaySeconds: 15
+          periodSeconds: 20
       volumes:
       - name: duplicati
         persistentVolumeClaim:
