@@ -16,6 +16,8 @@ spec:
     matchLabels:
       app: duplicati
       part-of: duplicati
+  strategy:
+    type: Recreate
   template:
     metadata:
       labels:
