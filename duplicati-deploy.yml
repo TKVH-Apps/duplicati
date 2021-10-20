@@ -1,0 +1,59 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: duplicati
+  labels:
+    app: duplicati
+    part-of: duplicati
+  annotations:
+    keel.sh/policy: force
+    keel.sh/trigger: poll
+    keel.sh/pollSchedule: "@hourly"
+    keel.sh/match-tag: true
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: duplicati
+      part-of: duplicati
+  template:
+    metadata:
+      labels:
+        app: duplicati
+        part-of: duplicati
+    spec:
+      containers:
+      - name: sonarr
+        image: lscr.io/linuxserver/duplicati:latest
+        ports:
+        - name: duplicati
+          containerPort: 8200
+        env:
+        - name: PUID
+          value: "0"
+        - name: PGID
+          value: "0"
+        - name: TZ
+          value: "Europe/Paris"
+        - name: UMASK
+          value: "022"
+        volumeMounts:
+        - name: duplicati
+          mountPath: /config
+        - name: sources
+          mountPath: /sources
+        securityContext:
+          allowPrivilegeEscalation: false
+          runAsUser: 0
+        resources:
+          limits:
+            memory: 256Mi
+          requests:
+            memory: 128Mi
+      volumes:
+      - name: duplicati
+        persistentVolumeClaim:
+          claimName: duplicati
+      - name: sources
+        persistentVolumeClaim:
+          claimName: sources
