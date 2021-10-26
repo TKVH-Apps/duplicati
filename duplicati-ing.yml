@@ -10,7 +10,7 @@ metadata:
     kubernetes.io/ingress.class: "nginx-internal"
 spec:
   rules:
-  - host: <path:apps-kv/data/duplicati/config#HOST>
+  - host: duplicati.home.lan
     http:
       paths:
       - path: /
@@ -22,4 +22,4 @@ spec:
               number: 8200
   tls:
   - hosts:
-    - <path:apps-kv/data/duplicati/config#HOST>
+    - duplicati.home.lan
