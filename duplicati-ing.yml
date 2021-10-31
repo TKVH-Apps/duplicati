@@ -17,9 +17,9 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: duplicati
+            name: ak-outpost-proxy01
             port:
-              number: 8200
+              number: 9000
   tls:
   - hosts:
     - duplicati.home.lan
