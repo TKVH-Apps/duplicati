@@ -25,7 +25,7 @@ spec:
         part-of: duplicati
     spec:
       containers:
-      - name: sonarr
+      - name: duplicati
         image: lscr.io/linuxserver/duplicati:latest
         ports:
         - name: duplicati
