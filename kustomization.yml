@@ -6,3 +6,4 @@ resources:
   - duplicati-svc.yml
   - duplicati-pvc.yml
   - duplicati-ing.yml
+  - duplicati-ns.yml
