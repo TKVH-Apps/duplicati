@@ -44,9 +44,9 @@ spec:
           runAsUser: 0
         resources:
           limits:
-            memory: 300Mi
+            memory: 150Mi
           requests:
-            memory: 200Mi
+            memory: 100Mi
         readinessProbe:
           tcpSocket:
             port: duplicati
