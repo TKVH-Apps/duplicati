@@ -42,11 +42,11 @@ spec:
         securityContext:
           allowPrivilegeEscalation: false
           runAsUser: 0
-        resources:
-          limits:
-            memory: 150Mi
-          requests:
-            memory: 100Mi
+#        resources:
+#          limits:
+#            memory: 150Mi
+#          requests:
+#            memory: 100Mi
         readinessProbe:
           tcpSocket:
             port: duplicati
