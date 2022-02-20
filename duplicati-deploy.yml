@@ -19,6 +19,7 @@ spec:
         app: duplicati
         part-of: duplicati
     spec:
+      serviceAccountName: duplicati
       containers:
       - name: duplicati
         image: lscr.io/linuxserver/duplicati:2.0.6
@@ -34,11 +35,19 @@ spec:
           value: "Europe/Paris"
         - name: UMASK
           value: "022"
+        - name: CLI_ARGS
+          valueFrom:
+            secretKeyRef:
+              name: duplicati
+              key: ARGS
         volumeMounts:
         - name: duplicati
           mountPath: /config
         - name: sources
           mountPath: /sources
+        - name: duplicati-secrets
+          mountPath: "/mnt/vault"
+          readOnly: true
         securityContext:
           allowPrivilegeEscalation: false
           runAsUser: 0
@@ -64,3 +73,9 @@ spec:
       - name: sources
         persistentVolumeClaim:
           claimName: sources
+      - name: duplicati-secrets
+        csi:
+          driver: "secrets-store.csi.k8s.io"
+          readOnly: true
+          volumeAttributes:
+            secretProviderClass: "duplicati"

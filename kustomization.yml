@@ -7,3 +7,5 @@ resources:
   - duplicati-pvc.yml
   - duplicati-ing.yml
   - duplicati-ns.yml
+  - duplicati-sa.yml
+  - duplicati-spc.yml
